@@ -1,7 +1,7 @@
 
 	const mongoose = require('mongoose');
 
-		const sellerSchema = new mongoose.Schema({
+		const buyerSchema = new mongoose.Schema({
 			fname: {
 				type:String,
 				required:true
@@ -10,13 +10,20 @@
 				type:String,
 				required:true
 			},
-			gender: {
-				type:String,
-				required:true
-			},
 			country: {
 				type:String,
 				required:true
+			},
+			companyName: {
+				type:String,
+				required:true
+			},
+			roleInCompany: {
+				type:String,
+				required:true
+			},
+			companyWebsite: {
+				type:String
 			},
 			phoneNumber: {
 				type:String,
@@ -33,8 +40,8 @@
 			},
 			registrationDate: {
 				type: Date,
-				default:Date.now()
+				default: Date.now()
 			}
-		});
+		})
 
-		module.exports = mongoose.model('Seller', sellerSchema);
+		module.exports = mongoose.model('Buyer', buyerSchema);

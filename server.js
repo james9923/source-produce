@@ -7,6 +7,7 @@
 	const passport = require('passport');
 
 		require('./config/passport')(passport);
+		//require('./config/pass')(passport);
 
 		const app = express();
 
@@ -25,11 +26,12 @@
 			// Passport middleware
 		app.use(passport.initialize());
 		app.use(passport.session());
+		
 
 		app.use('/routes', require('./app/routes'));
 
 		route(app);
 
-		app.listen(process.env.PORT || 2020, function(){
-			console.log('Server started on port 2020')
+		app.listen(process.env.PORT || 4100, function(){
+			console.log('Server started on port 4100')
 		})

@@ -3,14 +3,12 @@
 	const passport = require('passport');
 
 	const Seller = require('../models/seller');
+	const Buyer = require('../models/buyer');
 
 	exports.register = function(req, res, next) {
 
-		fname = req.body.fname;
-		lname = req.body.lname;
-		gender = req.body.gender;
-		email = req.body.email;
-		password = req.body.password;
+		let {fname, lname, gender, country, phoneNumber, email, password} = req.body;
+
 
 			Seller.findOne({email:email}, function(err, result){
 				if(err) {
@@ -21,11 +19,15 @@
 					res.send("You can't use this email");
 				} else {
 					const nSeller = new Seller({
-						fname: fname,
-						lname: lname,
-						gender: gender,
-						email: email,
-						password: password
+						
+						fname,
+						lname,
+						gender,
+						country,
+						phoneNumber,
+						email,
+						password
+
 					})
 
 						bcrypt.genSalt(5, (err, salt) =>
@@ -36,41 +38,59 @@
 							// Save user
 							nSeller.save()
 							.then(result => {
-								res.send('You are now registered and can log in');
-								res.redirect('/seller/login');
+								res.send('Data Successfully Captured. You can now proceed to login');
+								//res.redirect('/seller/login');
 							})
 							.catch(err => console.log(err));
 						}))
-
-
-					// nSeller.save(function(err){
-					// 	if(err){
-					// 		res.send(err);
-					// 	} else {
-					// 		res.send("User successfully saved to DB");
-					// 	}
-					// })
 				}
 			});
 	}
 
-	//exports.login = function(req, res, next) {
 
-		  
-			//res.send("Successful");
+	/////////////**********End of Seller Registration *****************///////////
 
-		// Seller.findOne({email:req.query.email, password:req.query.password},function(err, result){
-		// 	if(err){
-		// 		res.send(err);
-		// 	}
 
-		// 	//console.log(result);
+	exports.buyerRegister = function(req, res, next) {
 
-		// 	if(result){
-		// 		res.send(result);
-		// 	} else {
-		// 		res.send("No result");
-		// 	}
+		let {fname, lname, country, companyName, roleInCompany, companyWebsite, phoneNumber,
+			email, password} = req.body;
 
-		// });
-	//}
+
+			Buyer.findOne({email:email}, function(err, result){
+				if(err) {
+					res.send(err);
+				}
+
+				if(result){
+					res.send("You can't use this email");
+				} else {
+					const nBuyer = new Buyer({
+						fname,
+						lname,
+						country,
+						companyName,
+						roleInCompany,
+						companyWebsite,
+						phoneNumber,
+						email,
+						password
+					})
+
+						bcrypt.genSalt(5, (err, salt) =>
+						bcrypt.hash(nBuyer.password, salt, (err, hash) => {
+							if(err) throw err;
+							// Set pasword to hashed
+							nBuyer.password = hash;
+							// Save user
+							nBuyer.save()
+							.then(result => {
+								res.send('Data Successfully Captured. You can now proceed to login');
+								//res.redirect('/buyer/login');
+							})
+							.catch(err => console.log(err));
+						}))
+				}
+			});
+	}
+
