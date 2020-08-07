@@ -17,7 +17,7 @@
 		const route = require('./app/routes');
 
 		mongoose.connect(db.url, {useNewUrlParser:true, useUnifiedTopology:true});
-		app.use(bodyParser.urlencoded({extended:true}));
+		app.use(bodyParser.raw({extended:true}));
 
 		app.use(session({
 		  secret: 'secret',

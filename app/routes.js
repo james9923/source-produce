@@ -10,7 +10,7 @@
 		  module.exports = function(app){
 
 		  	app.post('/seller/register', signupController.register);
-		  	app.get('/seller/login', passport.authenticate('local-SellerSignup', {session:false}), function(req, res, next) {
+		  	app.post('/seller/login', passport.authenticate('local-SellerSignup', {session:false}), function(req, res, next) {
 		  		res.json(req.user);
 		  	});
 
@@ -20,7 +20,7 @@
 
 		  	app.post('/buyer/register', signupController.buyerRegister);
 
-		  	app.get('/buyer/login', passport.authenticate('local-BuyerSignup', {session:false}), function(req, res, next) {
+		  	app.post('/buyer/login', passport.authenticate('local-BuyerSignup', {session:false}), function(req, res, next) {
 		  		res.json(req.user);
 		  	}); 
 
