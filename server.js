@@ -1,6 +1,7 @@
 
 	const express = require("express"),
 		bodyParser = require('body-parser'),
+		cors = require('cors'),
 		mongoose = require('mongoose');
 
 	const session = require('express-session');
@@ -10,6 +11,7 @@
 		//require('./config/pass')(passport);
 
 		const app = express();
+		app.use(cors());
 
 		const db = require('./config/database');
 		const route = require('./app/routes');
