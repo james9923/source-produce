@@ -3,6 +3,7 @@
 		  signupController = require('./controllers/signup'),
 		  offersController = require('./controllers/offers'),
 		  productController = require('./controllers/products'),
+		  destinationController = require('./controllers/destinations'),
 		  passport = require('passport');
 
 	const { ensureAuthenticated } = require('../config/auth');
@@ -24,9 +25,13 @@
 		  		res.json(req.user);
 		  	}); 
 
+		  	app.post('/buyer/productOffers', productController.uploadProducts);
 		  	app.get('/buyer/productOffers', productController.viewProducts);
 
 		  	app.get('/buyer/productOffers/:product', offersController.buyerDisplayOffers);
+
+		  	app.post('/buyer/destination', destinationController.fillDestination);
+		  	app.get('/buyer/destination', destinationController.viewDestination);
 
 
 		  }

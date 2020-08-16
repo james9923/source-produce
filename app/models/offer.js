@@ -38,6 +38,17 @@
 				type:String,
 				required:true
 			},
+
+			price:{
+				type:String,
+				required:true
+			},
+
+			shipmentDate:{
+				type:String,
+				required:true
+			},
+
 			date: {
 				type:Date,
 				default: Date.now()

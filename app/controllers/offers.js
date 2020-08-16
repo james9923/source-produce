@@ -12,14 +12,16 @@
 				stockLocation: req.body.stockLocation,
 				packagePerBag: req.body.packagePerBag,
 				numberOfBags: req.body.numberOfBags,
-				inspection: req.body.inspection
+				inspection: req.body.inspection,
+				price: req.body.price,
+				shipmentDate: req.body.shipmentDate
 		});
 
 		newOffer.save(function(err){
 			if(err){
 				res.send(err);
 			} else {
-				res.send("Product Data has been Captured");
+				res.send("Offer Data has been Captured");
 			}
 		});
 	}

@@ -7,7 +7,7 @@
 
 	exports.register = function(req, res, next) {
 
-		let {fname, lname, gender, country, phoneNumber, email, password} = req.body;
+		let {fname, lname, gender, state, country, phoneNumber, email, password} = req.body;
 
 
 			Seller.findOne({email:email}, function(err, result){
@@ -23,6 +23,7 @@
 						fname,
 						lname,
 						gender,
+						state,
 						country,
 						phoneNumber,
 						email,
@@ -53,7 +54,7 @@
 
 	exports.buyerRegister = function(req, res, next) {
 
-		let {fname, lname, country, companyName, roleInCompany, companyWebsite, phoneNumber,
+		let {fname, lname, state, country, companyName, roleInCompany, companyWebsite, phoneNumber,
 			email, password} = req.body;
 
 
@@ -68,6 +69,7 @@
 					const nBuyer = new Buyer({
 						fname,
 						lname,
+						state,
 						country,
 						companyName,
 						roleInCompany,
