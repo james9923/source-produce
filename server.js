@@ -5,6 +5,7 @@
 		mongoose = require('mongoose');
 
 	const session = require('express-session');
+	const MemoryStore = require('memorystore') (session);
 	const passport = require('passport');
 
 		require('./config/passport')(passport);
@@ -29,7 +30,10 @@
 		app.use(session({
 		  secret: 'secret',
 		  resave: true,
-		  saveUninitialized: true
+		  saveUninitialized: true,
+		  store: new MemoryStore({
+		  	checkPeriod:86400000
+		  })
 		}));
 
 			// Passport middleware
