@@ -29,8 +29,11 @@
 						}
 					})
 				})
-				.catch(err => console.log(err));
-				res.json({msg:"Internal Server Error"});
+				.catch(err => {
+					console.log(err);
+					res.json({msg:"Internal Server Error"});
+				});
+				
 			}));
 
 
@@ -56,8 +59,11 @@
 						}
 					})
 				})
-				.catch(err => console.log(err));
-				res.json({msg:'Internal Server Error'});
+				.catch(err => {
+					console.log(err);
+					res.json({msg:'Internal Server Error'});
+				});
+				
 			}));
 
 
