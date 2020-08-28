@@ -50,7 +50,8 @@
 								res.json({msg:'Data Successfully Captured. You can now proceed to login'});
 								//res.redirect('/seller/login');
 							})
-							.catch(err => console.log(err); res.json({msg:'Internal Server Error'}));
+							.catch(err => console.log(err));
+							res.json({msg:'Internal Server Error'});
 						}))
 				}
 			});
@@ -106,7 +107,8 @@
 								res.json({msg:'Data Successfully Captured. You can now proceed to login'});
 								//res.redirect('/buyer/login');
 							})
-							.catch(err => console.log(err); res.json({msg:'Internal Server Error'}));
+							.catch(err => console.log(err));
+							res.json({msg:'Internal Server Error'})
 						}))
 				}
 			});
