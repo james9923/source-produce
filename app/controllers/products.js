@@ -14,7 +14,7 @@
 				if(err){
 					res.send(err);
 				} else {
-					res.send("Product Data Successfully Captured");
+					res.json({msg:"Product Data Successfully Captured"});
 				}
 			});
 

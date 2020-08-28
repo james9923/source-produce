@@ -21,7 +21,7 @@
 			if(err){
 				res.send(err);
 			} else {
-				res.send("Offer Data has been Captured");
+				res.json({msg:"Offer Data has been Captured"});
 			}
 		});
 	}

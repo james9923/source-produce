@@ -16,7 +16,7 @@
 				}
 
 				if(result){
-					res.send("You can't use this email");
+					res.json({msg:"You can't use this email"});
 				} else {
 					const nSeller = new Seller({
 						
@@ -32,17 +32,25 @@
 					})
 
 						bcrypt.genSalt(5, (err, salt) =>
+							
 						bcrypt.hash(nSeller.password, salt, (err, hash) => {
+							//NEWLY ADDED
+
+							if(typeof nSeller.password === 'undefined'){
+								res.json({msg:'You cannot use this password'});
+							}
+
+							//END OF NEWLY ADDED
 							if(err) throw err;
 							// Set pasword to hashed
 							nSeller.password = hash;
 							// Save user
 							nSeller.save()
 							.then(result => {
-								res.send('Data Successfully Captured. You can now proceed to login');
+								res.json({msg:'Data Successfully Captured. You can now proceed to login'});
 								//res.redirect('/seller/login');
 							})
-							.catch(err => console.log(err));
+							.catch(err => console.log(err); res.json({msg:'Internal Server Error'}));
 						}))
 				}
 			});
@@ -64,7 +72,7 @@
 				}
 
 				if(result){
-					res.send("You can't use this email");
+					res.json({msg:"You can't use this email"});
 				} else {
 					const nBuyer = new Buyer({
 						fname,
@@ -80,17 +88,25 @@
 					})
 
 						bcrypt.genSalt(5, (err, salt) =>
+							
+
 						bcrypt.hash(nBuyer.password, salt, (err, hash) => {
+							//NEWLY ADDED SECTION
+								if(typeof nBuyer.password === 'undefined') {
+									res.json({msg:'You cannot use this password'});
+								}
+
+							//END OF NEWLY ADDED SECTION
 							if(err) throw err;
 							// Set pasword to hashed
 							nBuyer.password = hash;
 							// Save user
 							nBuyer.save()
 							.then(result => {
-								res.send('Data Successfully Captured. You can now proceed to login');
+								res.json({msg:'Data Successfully Captured. You can now proceed to login'});
 								//res.redirect('/buyer/login');
 							})
-							.catch(err => console.log(err));
+							.catch(err => console.log(err); res.json({msg:'Internal Server Error'}));
 						}))
 				}
 			});

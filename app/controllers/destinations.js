@@ -13,7 +13,7 @@
 				if(err){
 				res.send(err);
 			} else {
-				res.send("Destination Data has been Captured");
+				res.json({msg:"Destination Data has been Captured"});
 			}
 			});
 	}
