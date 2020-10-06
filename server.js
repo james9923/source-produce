@@ -1,7 +1,7 @@
 
 	const express = require("express"),
 		bodyParser = require('body-parser'),
-		cors = require('cors'),
+		// cors = require('cors'),
 		mongoose = require('mongoose');
 
 	const session = require('express-session');
@@ -12,13 +12,13 @@
 		//require('./config/pass')(passport);
 
 		const app = express();
-		app.use(cors());
-		app.use((req, res, next) => {
-  			res.setHeader('Access-Control-Allow-Origin', '*');
-  			res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
-  			res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type,Authorization');
- 		     next();
-		});
+		// app.use(cors());
+		// app.use((req, res, next) => {
+  		// 	res.setHeader('Access-Control-Allow-Origin', '*');
+  		// 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, DELETE, PUT');
+  		// 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type,Authorization');
+ 		//      next();
+		// });
 
 		const db = require('./config/database');
 		const route = require('./app/routes');
