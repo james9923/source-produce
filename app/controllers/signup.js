@@ -6,17 +6,17 @@
 	const Buyer = require('../models/buyer');
 
 	exports.register = function(req, res, next) {
-
+		if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+			return res.json({msg:"You can't send an empty body"});
+		}
 		let {fname, lname, gender, state, country, phoneNumber, email, password} = req.body;
-
-
 			Seller.findOne({email:email}, function(err, result){
 				if(err) {
-					res.send(err);
+					return res.send(err);
 				}
 
 				if(result){
-					res.json({msg:"You can't use this email"});
+					return res.json({msg:"You can't use this email"});
 				} else {
 					const nSeller = new Seller({
 						
@@ -37,7 +37,7 @@
 							//NEWLY ADDED
 
 							if(typeof nSeller.password === 'undefined'){
-								res.json({msg:'You cannot use this password'});
+								return res.json({msg:'You cannot use this password'});
 							}
 
 							//END OF NEWLY ADDED
@@ -47,12 +47,12 @@
 							// Save user
 							nSeller.save()
 							.then(result => {
-								res.json({msg:'Data Successfully Captured. You can now proceed to login'});
+								return res.json({msg:'Data Successfully Captured. You can now proceed to login'});
 								//res.redirect('/seller/login');
 							})
 							.catch(err => {
 								console.log(err);
-								res.json({msg:'Internal Server Error'});
+								return res.json({msg: err._message});
 							});
 							
 						}))
@@ -65,18 +65,20 @@
 
 
 	exports.buyerRegister = function(req, res, next) {
-
+		if(req.body.constructor === Object && Object.keys(req.body).length === 0) {
+			return res.json({msg:"You can't send an empty body"});
+		}
 		let {fname, lname, state, country, companyName, roleInCompany, companyWebsite, phoneNumber,
 			email, password} = req.body;
 
 
 			Buyer.findOne({email:email}, function(err, result){
 				if(err) {
-					res.send(err);
+					return res.send(err);
 				}
 
 				if(result){
-					res.json({msg:"You can't use this email"});
+					return res.json({msg:"You can't use this email"});
 				} else {
 					const nBuyer = new Buyer({
 						fname,
@@ -97,7 +99,7 @@
 						bcrypt.hash(nBuyer.password, salt, (err, hash) => {
 							//NEWLY ADDED SECTION
 								if(typeof nBuyer.password === 'undefined') {
-									res.json({msg:'You cannot use this password'});
+									return res.json({msg:'You cannot use this password'});
 								}
 
 							//END OF NEWLY ADDED SECTION
@@ -107,12 +109,12 @@
 							// Save user
 							nBuyer.save()
 							.then(result => {
-								res.json({msg:'Data Successfully Captured. You can now proceed to login'});
+								return res.json({msg:'Data Successfully Captured. You can now proceed to login'});
 								//res.redirect('/buyer/login');
 							})
 							.catch(err => {
 								console.log(err);
-								res.json({msg:'Internal Server Error'})
+								return res.json({msg: err._message})
 							});
 
 						}))
